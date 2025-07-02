@@ -9,7 +9,7 @@ def home():
     return "TikTok Comments API is running."
 
 @app.route("/comments")
-def get_comments():
+async def get_comments():
     url = request.args.get("url", "")
     match = re.search(r'/video/(\d+)', url)
     if not match:
@@ -19,7 +19,8 @@ def get_comments():
         video_id = match.group(1)
         api = TikTokApi()
         video = api.video(id=video_id)
-        usernames = [c.author.username for c in video.comments(count=30)]
+        comments = await asyncio.gather(*[comment async for comment in video.comments(count=30)])
+        usernames = [c.author.username for c in comments]
         return jsonify({"usernames": usernames})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
