@@ -1,8 +1,0 @@
-services:
-  - type: web
-    name: tiktok-comments-api
-    env: docker
-    plan: free
-    dockerfilePath: ./Dockerfile
-    healthCheckPath: /
-    region: oregon
