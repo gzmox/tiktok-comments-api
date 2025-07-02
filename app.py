@@ -1,9 +1,13 @@
-import asyncio
 from flask import Flask, request, jsonify
-from scraper import scrape_comments
 import re
+import asyncio
+from scraper import scrape_comments
 
 app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "TikTok Comment Scraper is live."
 
 @app.route("/comments")
 def comments():
