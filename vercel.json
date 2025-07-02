@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "comments.py", "use": "@vercel/python" }
+  ],
+  "routes": [
+    { "src": "/comments", "dest": "comments.py" }
+  ]
+}
